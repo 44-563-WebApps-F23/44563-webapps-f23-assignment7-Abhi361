@@ -12,6 +12,8 @@
 <div id="penalty" style="font-weight: bold; text-align: center; color: #000;">Penalty is zero.</div>
 <div id="helpButton" onclick="help()" style="text-align: center; color: red; cursor: pointer; text-decoration: underline;">Click for help.</div>
 <div id="help" style="text-align: center; color: #000;">Help report</div>
+<button type="button" class="btn btn-primary" onclick="newGame()">New Game</button>
+
 
     <div class="d-flex justify-content-center">
         <div>        
@@ -197,6 +199,25 @@
             document.getElementById("help").innerHTML = helpText;
         }    
 
+    </script>
+    
+    <script>
+        function newGame() {
+        checkCount = 0;
+        penalty = 0;
+        lastCheck = 0;
+        treasureLocation = Math.floor(Math.random() * 25);
+        trapLocation = Math.floor(Math.random() * 25);
+    
+        document.getElementById("locations").innerHTML = "Number of locations checked is : " + checkCount;
+        document.getElementById("penalty").innerHTML = "Penalty is : " + penalty;
+    
+        var imageElements = document.getElementsByTagName("img");
+        for (let i = 0; i < imageElements.length; i++) {
+            imageElements[i].src = "Hidden.png";
+        }
+        gameOver = false;
+    }
     </script>
   </body>
 </html>
