@@ -63,6 +63,8 @@
     <button id="startTimer">Start Timer</button>
     <button id="react">React</button>
 
+    <button id="bonusButton">Bonus</button> 
+
     <script>
         let reactTime = undefined;
 
@@ -74,10 +76,33 @@
         const reactButton = document.getElementById("react");
         reactButton.onclick = recordTime;
 
+       
+        function getRandomCountdown() {
+            return Math.floor(Math.random() * 9) + 2;
+        }
+
+        
+        const bonusButton = document.getElementById("bonusButton");
+        bonusButton.onclick = () => {
+            const countdown = getRandomCountdown();
+            document.getElementById("target").innerHTML = "Get Ready!";
+            document.getElementById("counter").innerHTML = Countdown: ${countdown} s;
+            setTimeout(() => {
+                document.getElementById("counter").innerHTML = "Go!";
+                reactButton.disabled = false;
+                setTimeout(() => {
+                    document.getElementById("counter").innerHTML = "";
+                    reactTime = undefined;
+                    reactButton.disabled = true;
+                    document.getElementById("target").innerHTML = "React when you see Go!";
+                }, 1000);
+            }, countdown * 1000);
+        };
+
         function startTime() {
             for (let i = 0; i < 9; i++) {
                 setTimeout(function () {
-                    document.getElementById("counter").innerHTML = `Count: ${i}`;
+                    document.getElementById("counter").innerHTML = Count: ${i};
                 }, (8 - i) * 1000);
             }
 
@@ -87,7 +112,7 @@
                 } else {
                     const endTime = Date.now();
                     const elapsed = endTime - reactTime;
-                    document.getElementById("target").innerHTML = `Time was ${elapsed} ms`;
+                    document.getElementById("target").innerHTML = Time was ${elapsed} ms;
                 }
             }, 8000);
         }
